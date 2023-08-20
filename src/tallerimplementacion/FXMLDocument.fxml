@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tallerimplementacion.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="396.0" prefWidth="570.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="tallerimplementacion.FXMLDocumentController">
     <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+        <Button fx:id="button" layoutX="18.0" layoutY="37.0" onAction="#handleButtonAction" text="iniciar" />
+      <WebView layoutX="229.0" layoutY="49.0" prefHeight="128.0" prefWidth="311.0" />
+      <TextArea layoutX="342.0" layoutY="213.0" prefHeight="157.0" prefWidth="200.0" />
+      <Button fx:id="button1" layoutX="106.0" layoutY="37.0" onAction="#handleButtonAction" text="terminar " />
+      <Text layoutX="342.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reporte" />
+      <TextField layoutX="249.0" layoutY="24.0" text="tiempo Total: " />
+      <TextArea layoutX="14.0" layoutY="182.0" prefHeight="200.0" prefWidth="200.0" />
+      <Text layoutX="17.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cola " />
+      <MenuBar layoutX="2.0" layoutY="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
     </children>
 </AnchorPane>
