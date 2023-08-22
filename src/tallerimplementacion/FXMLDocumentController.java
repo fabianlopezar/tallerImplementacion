@@ -27,7 +27,11 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private TextArea showResponse;
-   
+   @FXML
+   private void startBTN(ActionEvent event){
+       System.out.println("deberia funcionar");     
+       timer(); 
+   }
     /*Crear Vehiculo*/
     private void crearVehiculo() {
         int minYear = 2000;
@@ -50,7 +54,7 @@ public class FXMLDocumentController implements Initializable {
             public void run() {
                 crearVehiculo();
                 showResponse.setText(colaVehiculos.toString());
-                System.out.println("deberia funcionar.");
+               
             }
         },1000,2000);
     }
@@ -58,7 +62,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colaVehiculos = new Cola<>();
-        timer();
+  
     }
 
 }
