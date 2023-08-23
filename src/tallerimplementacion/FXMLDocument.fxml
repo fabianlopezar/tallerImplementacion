@@ -16,5 +16,6 @@
       <Label fx:id="estoyLibre3" layoutX="235.0" layoutY="51.0" text="estoyLibre" />
       <Label fx:id="estoyLibre4" layoutX="300.0" layoutY="51.0" text="estoyLibre" />
       <WebView fx:id="webView1" layoutX="135.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="274.0" layoutY="316.0" mnemonicParsing="false" onAction="#agregarBTN" text="Button" />
    </children>
 </AnchorPane>

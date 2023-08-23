@@ -42,9 +42,16 @@ public class FXMLDocumentController implements Initializable {
     private WebView webView1;
 
     @FXML
+    private void agregarBTN(ActionEvent event) {
+        crearVehiculo();
+
+    }
+
+    @FXML
     private void startBTN(ActionEvent event) {
-        System.out.println("deberia funcionar");
+
         timer();
+        timerReceptor();
 
         // Cargar la URL en el WebView
         WebEngine webEngine = webView1.getEngine();
@@ -69,24 +76,29 @@ public class FXMLDocumentController implements Initializable {
     /*Llenar lista receptores*/
     private void llenarListaReceptores() {
         listaReceptor.add(new Receptor());
+        /*listaReceptor.add(new Receptor());
         listaReceptor.add(new Receptor());
-        listaReceptor.add(new Receptor());
-        listaReceptor.add(new Receptor());
+        listaReceptor.add(new Receptor());*/
     }
 
     private void showBoolean() {
         //String.valueOf(valorBooleano);
-        estoyLibre1.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
-        estoyLibre2.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
+        // estoyLibre1.setText("hola");
+        /*estoyLibre2.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
         estoyLibre3.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
-        estoyLibre4.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
+        estoyLibre4.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));*/
     }
 
     private void agregarAReceptor() {
+        //System.out.println("en ejecucion");
         for (Receptor elem : listaReceptor) {
-            if (elem.getEstoyLibre() == true) {
-                //debo eliminar el ultimo y agregarlo al receptor.
-              //  elem.atenderVehiculo(elem);
+            if (elem.getEstoyLibre() == true && !colaVehiculos.estaVacia()) {
+                //debo eliminar el primero y agregarlo al receptor.
+
+                //System.out.println(colaVehiculos.estaVacia());
+                System.out.println("soy la cola: " + colaVehiculos);
+                elem.atenderVehiculo(colaVehiculos.desencolar());
+
             }
         }
     }
@@ -97,16 +109,29 @@ public class FXMLDocumentController implements Initializable {
         timer.schedule(new TimerTask() {
             public void run() {
                 crearVehiculo();
+                showBoolean();
                 showResponse.setText(colaVehiculos.toString());
 
             }
-        }, 1000, 2000);
+        }, 1000, 2000);//deberia ser random
+    }
+
+    private void timerReceptor() {
+        Timer timer = new Timer();
+
+        timer.schedule(new TimerTask() {
+            public void run() {
+
+                agregarAReceptor();
+
+            }
+        }, 1000, 1000);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colaVehiculos = new Cola<>();
         llenarListaReceptores();
-        showBoolean();
+
     }
 }
