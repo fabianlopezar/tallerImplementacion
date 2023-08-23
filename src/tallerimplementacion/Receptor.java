@@ -13,9 +13,9 @@ public class Receptor {
 
     private boolean estoyLibre = true;
 
-    private int counterVehiculos=0;
+    private int counterVehiculos = 0;
 
-    private int tiempoTotal=0;
+    private int tiempoTotal = 0;
     //falta get y set
     private int counter = 0;
 
@@ -28,18 +28,21 @@ public class Receptor {
      * @return the value of tiempoTotal
      */
     public void atenderVehiculo(Vehiculo elem) {
-        int timeLimit = elem.getTiempo();
+        int timeLimit = elem.getTiempo() * 1000;
+        System.out.println("estoy ocupado " + elem);
         estoyLibre = false;
-        
-        while (counter < timeLimit) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                public void run() {
-                    counter++;
-                }
-            }, 1000, 1000);
-        } 
-        estoyLibre = false;
+
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(timeLimit);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("estoy libre");
+            estoyLibre = true;
+        });
+        thread.start();
+
     }
 
     public int getTiempoTotal() {
