@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tallerimplementacion;
 
 import datos.Vehiculo;
@@ -13,29 +8,53 @@ import java.util.TimerTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import modelo.Cola;
+import javafx.scene.control.Label;
+import java.util.LinkedList;
 
 /**
  *
- * @author fabian_esteban.lopez
+ *
+ * Controller class for FXMLDocument.fxml
  */
 public class FXMLDocumentController implements Initializable {
 
     Cola<Vehiculo> colaVehiculos;
-    
+
+    LinkedList<Receptor> listaReceptor = new LinkedList<>();
+
+    @FXML
+    private Label estoyLibre1;
+    @FXML
+    private Label estoyLibre2;
+    @FXML
+    private Label estoyLibre3;
+    @FXML
+    private Label estoyLibre4;
+
     @FXML
     private TextArea showResponse;
-   @FXML
-   private void startBTN(ActionEvent event){
-       System.out.println("deberia funcionar");     
-       timer(); 
-   }
-    /*Crear Vehiculo*/
+
+    @FXML
+    private WebView webView1;
+
+    @FXML
+    private void startBTN(ActionEvent event) {
+        System.out.println("deberia funcionar");
+        timer();
+
+        // Cargar la URL en el WebView
+        WebEngine webEngine = webView1.getEngine();
+        webEngine.load("file:///E:/PS4/pagina_.html"); // Cambia esta URL por la que desees
+    }
+
+    //Crear Vehiculo
     private void crearVehiculo() {
         int minYear = 2000;
-        int maxYear = 2004;
+        int maxYear = 2024;
         int randomYear = (int) (Math.random() * (maxYear - minYear + 1));
         String modeloV = String.valueOf(randomYear);
         String nombreD = "David";
@@ -47,6 +66,31 @@ public class FXMLDocumentController implements Initializable {
         colaVehiculos.encolar(new Vehiculo(modeloV, nombreD, estadoVehiculo, tiempo));
     }
 
+    /*Llenar lista receptores*/
+    private void llenarListaReceptores() {
+        listaReceptor.add(new Receptor());
+        listaReceptor.add(new Receptor());
+        listaReceptor.add(new Receptor());
+        listaReceptor.add(new Receptor());
+    }
+
+    private void showBoolean() {
+        //String.valueOf(valorBooleano);
+        estoyLibre1.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
+        estoyLibre2.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
+        estoyLibre3.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
+        estoyLibre4.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
+    }
+
+    private void agregarAReceptor() {
+        for (Receptor elem : listaReceptor) {
+            if (elem.getEstoyLibre() == true) {
+                //debo eliminar el ultimo y agregarlo al receptor.
+              //  elem.atenderVehiculo(elem);
+            }
+        }
+    }
+
     private void timer() {
         Timer timer = new Timer();
 
@@ -54,15 +98,15 @@ public class FXMLDocumentController implements Initializable {
             public void run() {
                 crearVehiculo();
                 showResponse.setText(colaVehiculos.toString());
-               
+
             }
-        },1000,2000);
+        }, 1000, 2000);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colaVehiculos = new Cola<>();
-  
+        llenarListaReceptores();
+        showBoolean();
     }
-
 }
