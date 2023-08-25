@@ -37,6 +37,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private TextArea showResponse;
+    @FXML
+    private TextArea showResults;
 
     @FXML
     private WebView webView1;
@@ -46,6 +48,8 @@ public class FXMLDocumentController implements Initializable {
         crearVehiculo();
 
     }
+    Timer timer = new Timer();
+    Timer timerReceptor = new Timer();
 
     @FXML
     private void startBTN(ActionEvent event) {
@@ -56,6 +60,12 @@ public class FXMLDocumentController implements Initializable {
         // Cargar la URL en el WebView
         WebEngine webEngine = webView1.getEngine();
         webEngine.load("file:///E:/PS4/pagina_.html"); // Cambia esta URL por la que desees
+    }
+
+    @FXML
+    private void detenerBTN(ActionEvent event) {
+        detenerTimer();
+
     }
 
     //Crear Vehiculo
@@ -104,8 +114,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void timer() {
-        Timer timer = new Timer();
-
         timer.schedule(new TimerTask() {
             public void run() {
                 crearVehiculo();
@@ -117,15 +125,24 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void timerReceptor() {
-        Timer timer = new Timer();
 
-        timer.schedule(new TimerTask() {
+        timerReceptor.schedule(new TimerTask() {
             public void run() {
 
                 agregarAReceptor();
 
             }
         }, 1000, 1000);
+    }
+
+    public void detenerTimer() {
+        timer.cancel();
+        timerReceptor.cancel();
+        String response = listaReceptor.get(0).getResponse();
+        showResults.setText(response);
+
+        System.out.println("Deberia Detenerse.");
+
     }
 
     @Override

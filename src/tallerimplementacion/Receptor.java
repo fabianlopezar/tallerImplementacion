@@ -19,6 +19,26 @@ public class Receptor {
     //falta get y set
     private int counter = 0;
 
+    private String response = "el numero de vehiculos atendidos fue de: " + counterVehiculos;
+
+    /**
+     * Get the value of response
+     *
+     * @return the value of response
+     */
+    public String getResponse() {
+        return response;
+    }
+
+    /**
+     * Set the value of response
+     *
+     * @param response new value of response
+     */
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
     public Receptor() {
     }
 
@@ -29,6 +49,8 @@ public class Receptor {
      */
     public void atenderVehiculo(Vehiculo elem) {
         int timeLimit = elem.getTiempo() * 1000;
+        counterVehiculos++;
+
         System.out.println("estoy ocupado " + elem);
         estoyLibre = false;
 
