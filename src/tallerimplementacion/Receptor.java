@@ -19,7 +19,7 @@ public class Receptor {
     //falta get y set
     private int counter = 0;
 
-    private String response = "el numero de vehiculos atendidos fue de: " + counterVehiculos;
+    private String response = "";
 
     /**
      * Get the value of response
@@ -47,11 +47,18 @@ public class Receptor {
      *
      * @return the value of tiempoTotal
      */
+    public void sumarVehiculo() {
+
+        counterVehiculos++;
+        response = "el numero de vehiculos atendidos fue de: " + counterVehiculos;
+    }
+
     public void atenderVehiculo(Vehiculo elem) {
         int timeLimit = elem.getTiempo() * 1000;
-        counterVehiculos++;
+        sumarVehiculo();
 
         System.out.println("estoy ocupado " + elem);
+        System.out.println("estoy counter " + counterVehiculos);
         estoyLibre = false;
 
         Thread thread = new Thread(() -> {

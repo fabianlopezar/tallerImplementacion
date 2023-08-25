@@ -23,8 +23,11 @@ import java.util.LinkedList;
 public class FXMLDocumentController implements Initializable {
 
     Cola<Vehiculo> colaVehiculos;
-
     LinkedList<Receptor> listaReceptor = new LinkedList<>();
+    Timer timer = new Timer();
+    Timer timerReceptor = new Timer();
+
+    String totalVehiculosPorReceptor;
 
     @FXML
     private Label estoyLibre1;
@@ -48,8 +51,6 @@ public class FXMLDocumentController implements Initializable {
         crearVehiculo();
 
     }
-    Timer timer = new Timer();
-    Timer timerReceptor = new Timer();
 
     @FXML
     private void startBTN(ActionEvent event) {
@@ -65,7 +66,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void detenerBTN(ActionEvent event) {
         detenerTimer();
+    }
 
+    private void totalVehiculosAtendidos() {
+
+        for (int i = 0; i < listaReceptor.size(); i++) {
+            totalVehiculosPorReceptor = "receptor " + i+1 + " atendio: " + listaReceptor.get(i).getCounterVehiculos()+" vehiculos.";
+        }
     }
 
     //Crear Vehiculo
@@ -139,8 +146,9 @@ public class FXMLDocumentController implements Initializable {
         timer.cancel();
         timerReceptor.cancel();
         String response = listaReceptor.get(0).getResponse();
-        showResults.setText(response);
-
+        totalVehiculosAtendidos();
+        
+        showResults.setText(response + "\n" + totalVehiculosPorReceptor);
         System.out.println("Deberia Detenerse.");
 
     }
