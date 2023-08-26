@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package tallerimplementacion;
+
+package modelo;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +15,7 @@ public class TallerImplementacion extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
         

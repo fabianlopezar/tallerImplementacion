@@ -1,10 +1,10 @@
-package tallerimplementacion;
+package controlador;
 
+import modelo.Receptor;
 import datos.Vehiculo;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
-import java.util.TimerTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,7 +12,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import modelo.Cola;
-import javafx.scene.control.Label;
 import java.util.LinkedList;
 
 /**
@@ -30,15 +29,6 @@ public class FXMLDocumentController implements Initializable {
     String totalVehiculosPorReceptor;
 
     @FXML
-    private Label estoyLibre1;
-    @FXML
-    private Label estoyLibre2;
-    @FXML
-    private Label estoyLibre3;
-    @FXML
-    private Label estoyLibre4;
-
-    @FXML
     private TextArea showResponse;
     @FXML
     private TextArea showResults;
@@ -49,14 +39,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void agregarBTN(ActionEvent event) {
         crearVehiculo();
-
     }
 
     @FXML
     private void startBTN(ActionEvent event) {
-
-        timer();
-        timerReceptor();
 
         // Cargar la URL en el WebView
         WebEngine webEngine = webView1.getEngine();
@@ -71,7 +57,7 @@ public class FXMLDocumentController implements Initializable {
     private void totalVehiculosAtendidos() {
 
         for (int i = 0; i < listaReceptor.size(); i++) {
-            totalVehiculosPorReceptor = "receptor " + i+1 + " atendio: " + listaReceptor.get(i).getCounterVehiculos()+" vehiculos.";
+            totalVehiculosPorReceptor = "receptor " + i + 1 + " atendio: " + listaReceptor.get(i).getCounterVehiculos() + " vehiculos.";
         }
     }
 
@@ -98,21 +84,9 @@ public class FXMLDocumentController implements Initializable {
         listaReceptor.add(new Receptor());*/
     }
 
-    private void showBoolean() {
-        //String.valueOf(valorBooleano);
-        // estoyLibre1.setText("hola");
-        /*estoyLibre2.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
-        estoyLibre3.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));
-        estoyLibre4.setText(String.valueOf(listaReceptor.get(0).getEstoyLibre()));*/
-    }
-
     private void agregarAReceptor() {
-        //System.out.println("en ejecucion");
         for (Receptor elem : listaReceptor) {
             if (elem.getEstoyLibre() == true && !colaVehiculos.estaVacia()) {
-                //debo eliminar el primero y agregarlo al receptor.
-
-                //System.out.println(colaVehiculos.estaVacia());
                 System.out.println("soy la cola: " + colaVehiculos);
                 elem.atenderVehiculo(colaVehiculos.desencolar());
 
@@ -120,37 +94,24 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    private void timer() {
-        timer.schedule(new TimerTask() {
-            public void run() {
-                crearVehiculo();
-                showBoolean();
-                showResponse.setText(colaVehiculos.toString());
-
-            }
-        }, 1000, 2000);//deberia ser random
-    }
-
-    private void timerReceptor() {
-
-        timerReceptor.schedule(new TimerTask() {
-            public void run() {
-
-                agregarAReceptor();
-
-            }
-        }, 1000, 1000);
-    }
-
     public void detenerTimer() {
         timer.cancel();
         timerReceptor.cancel();
         String response = listaReceptor.get(0).getResponse();
         totalVehiculosAtendidos();
-        
+
         showResults.setText(response + "\n" + totalVehiculosPorReceptor);
         System.out.println("Deberia Detenerse.");
 
+    }
+
+    private void hacerQueTodoFuncione() {
+        crearVehiculo();
+        //revisarReceptoresLibres();
+        //tiempoTotal++;
+        //webEngineCola.loadContent(hacerHtmlCola());
+        //webEngineReceptores.loadContent(hacerHtmlReceptores());
+        
     }
 
     @Override

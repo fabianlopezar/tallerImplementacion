@@ -1,9 +1,7 @@
-package tallerimplementacion;
+package modelo;
 
 import datos.Vehiculo;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import javafx.animation.Timeline;
 
 /**
  *
@@ -11,14 +9,10 @@ import java.util.TimerTask;
  */
 public class Receptor {
 
+    Timeline timeline = new Timeline();
     private boolean estoyLibre = true;
-
     private int counterVehiculos = 0;
-
     private int tiempoTotal = 0;
-    //falta get y set
-    private int counter = 0;
-
     private String response = "";
 
     /**
@@ -30,11 +24,6 @@ public class Receptor {
         return response;
     }
 
-    /**
-     * Set the value of response
-     *
-     * @param response new value of response
-     */
     public void setResponse(String response) {
         this.response = response;
     }
@@ -42,36 +31,17 @@ public class Receptor {
     public Receptor() {
     }
 
-    /**
-     * Get the value of tiempoTotal
-     *
-     * @return the value of tiempoTotal
-     */
     public void sumarVehiculo() {
-
         counterVehiculos++;
         response = "el numero de vehiculos atendidos fue de: " + counterVehiculos;
     }
 
+    // Atender al vehiculo
     public void atenderVehiculo(Vehiculo elem) {
-        int timeLimit = elem.getTiempo() * 1000;
+        int timeWait = elem.getTiempo() * 1000;
         sumarVehiculo();
-
         System.out.println("estoy ocupado " + elem);
         System.out.println("estoy counter " + counterVehiculos);
-        estoyLibre = false;
-
-        Thread thread = new Thread(() -> {
-            try {
-                Thread.sleep(timeLimit);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("estoy libre");
-            estoyLibre = true;
-        });
-        thread.start();
-
     }
 
     public int getTiempoTotal() {
