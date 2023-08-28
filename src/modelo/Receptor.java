@@ -14,6 +14,27 @@ public class Receptor {
     private int counterVehiculos = 0;
     private int tiempoTotal = 0;
     private String response = "";
+    
+    private int tiempoOcupado;
+
+    /**
+     * Get the value of tiempoOcupado
+     *
+     * @return the value of tiempoOcupado
+     */
+    public int getTiempoOcupado() {
+        return tiempoOcupado;
+    }
+
+    /**
+     * Set the value of tiempoOcupado
+     *
+     * @param tiempoOcupado new value of tiempoOcupado
+     */
+    public void setTiempoOcupado(int tiempoOcupado) {
+        this.tiempoOcupado = tiempoOcupado;
+    }
+
 
     /**
      * Get the value of response
