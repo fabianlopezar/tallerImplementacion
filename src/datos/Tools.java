@@ -1,6 +1,8 @@
 package datos;
 
+import java.util.LinkedList;
 import modelo.Cola;
+import modelo.Receptor;
 
 public class Tools {
 
@@ -11,7 +13,7 @@ public class Tools {
         sb.append("<noscript>").append("</noscript>");
         if (!colaV.estaVacia()) {
             sb.append("<table align=\"center\"border=\"2\">");
-            sb.append("<tr>").append("<th>").append("Vehiculos").append("<\th>").append("<\tr>");
+            sb.append("<tr>").append("<th>").append("Vehiculos").append("</th>").append("</tr>");
             do {
                 Carro vAUX = colaV.desencolar();
                 sb.append("<tr>").append("<td>");
@@ -27,6 +29,9 @@ public class Tools {
         sb.append("</html>");
         return sb.toString();
     }
+    /*public static String convertirColaReceptorAHtml(LinkedList<Receptor> elemR){
+        
+    }*/
 
  /*   public static String convertirColaAHtml(Cola<Vehiculo> colaVehiculos, String texto) {
         String html = "<br><center>Se retiro" + texto + "</center></br>";

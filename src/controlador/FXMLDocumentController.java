@@ -44,8 +44,6 @@ public class FXMLDocumentController implements Initializable {
     String totalVehiculosPorReceptor;
 
     @FXML
-    private TextArea showResponse;
-    @FXML
     private TextArea showResults;
 
     @FXML
@@ -102,14 +100,11 @@ public class FXMLDocumentController implements Initializable {
         actualizarTabla();
         revisarReceptoresLibres();
         tiempoTotal++;
-        //  webEngineCola.loadContent(hacerHtmlCola());
-        //webEngineReceptores.loadContent(hacerHtmlReceptores());
-        showResponse.setText(colaVehiculos.toString());
-
     }
 
     private void revisarReceptoresLibres() {
         for (Receptor elem : listaReceptores) {
+            
             if (elem.getEstoyLibre() && !colaVehiculos.estaVacia()) {
                 Carro v = colaVehiculos.desencolar();
                 elem.setEstoyLibre(false);
@@ -118,7 +113,7 @@ public class FXMLDocumentController implements Initializable {
 
                 System.out.println("Soy el receptor: " + elem + " estoy ocupado " + elem.getTiempoOcupado());
                 elem.setTiempoTotal(v.getTiempo() + elem.getTiempoTotal());
-               
+
             } else {
                 if (elem.getTiempoOcupado() > 0) {
                     elem.setTiempoOcupado(elem.getTiempoOcupado() - 1);
@@ -242,9 +237,9 @@ public class FXMLDocumentController implements Initializable {
     public void actualizarTabla() {
         //atributo de clase
 
-        System.out.println("estoy en actualizar.");
+        //System.out.println("estoy en actualizar.");
         String html = Tools.convertirColaAHtml(colaVehiculos);
-        System.out.println("html   "+html);
+        //System.out.println("html   "+html);
         web.loadContent(html);
     }
 
@@ -253,6 +248,5 @@ public class FXMLDocumentController implements Initializable {
         colaVehiculos = new Cola<>();
         llenarListaReceptores();
         web = webView1.getEngine();
-
     }
 }
