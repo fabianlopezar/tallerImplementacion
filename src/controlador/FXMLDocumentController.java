@@ -13,18 +13,18 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import modelo.Cola;
 import java.util.LinkedList;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
 
-/**
- *
- *
- * Controller class for FXMLDocument.fxml
- */
 public class FXMLDocumentController implements Initializable {
 
     Cola<Vehiculo> colaVehiculos;
-    LinkedList<Receptor> listaReceptor = new LinkedList<>();
-    Timer timer = new Timer();
-    Timer timerReceptor = new Timer();
+    LinkedList<Receptor> listaReceptores = new LinkedList<>();
+    private Timeline t;
+    public int tiempoTotal;
 
     String totalVehiculosPorReceptor;
 
@@ -44,6 +44,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void startBTN(ActionEvent event) {
 
+        timer();
         // Cargar la URL en el WebView
         WebEngine webEngine = webView1.getEngine();
         webEngine.load("file:///E:/PS4/pagina_.html"); // Cambia esta URL por la que desees
@@ -51,41 +52,35 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void detenerBTN(ActionEvent event) {
-        detenerTimer();
+
     }
 
     private void totalVehiculosAtendidos() {
 
-        for (int i = 0; i < listaReceptor.size(); i++) {
-            totalVehiculosPorReceptor = "receptor " + i + 1 + " atendio: " + listaReceptor.get(i).getCounterVehiculos() + " vehiculos.";
+        for (int i = 0; i < listaReceptores.size(); i++) {
+            totalVehiculosPorReceptor = "receptor " + i + 1 + " atendio: " + listaReceptores.get(i).getCounterVehiculos() + " vehiculos.";
         }
     }
 
     //Crear Vehiculo
     private void crearVehiculo() {
-        int minYear = 2000;
-        int maxYear = 2024;
-        int randomYear = (int) (Math.random() * (maxYear - minYear + 1));
-        String modeloV = String.valueOf(randomYear);
-        String nombreD = "David";
-        boolean estadoVehiculo = true;
-        int minTime = 1;
-        int maxTime = 5;
-        int tiempo = (int) (Math.random() * (maxTime - minTime + 1));
+        int numberVehiculos = (int) (Math.random() * 6);
 
-        colaVehiculos.encolar(new Vehiculo(modeloV, nombreD, estadoVehiculo, tiempo));
+        for (int i = 0; i < numberVehiculos; i++) {
+            Vehiculo v = FactoryVehiculo.create();
+            colaVehiculos.encolar(v);
+        }
     }
 
     /*Llenar lista receptores*/
     private void llenarListaReceptores() {
-        listaReceptor.add(new Receptor());
-        /*listaReceptor.add(new Receptor());
-        listaReceptor.add(new Receptor());
-        listaReceptor.add(new Receptor());*/
+        for (int i = 0; i < 4; i++) {
+            listaReceptores.add(new Receptor());
+        }
     }
 
     private void agregarAReceptor() {
-        for (Receptor elem : listaReceptor) {
+        for (Receptor elem : listaReceptores) {
             if (elem.getEstoyLibre() == true && !colaVehiculos.estaVacia()) {
                 System.out.println("soy la cola: " + colaVehiculos);
                 elem.atenderVehiculo(colaVehiculos.desencolar());
@@ -94,24 +89,46 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    public void detenerTimer() {
-        timer.cancel();
-        timerReceptor.cancel();
-        String response = listaReceptor.get(0).getResponse();
-        totalVehiculosAtendidos();
-
-        showResults.setText(response + "\n" + totalVehiculosPorReceptor);
-        System.out.println("Deberia Detenerse.");
+    private void hacerQueTodoFuncione() {
+        crearVehiculo();
+        System.out.println("cree un vehiculo");
+        revisarReceptoresLibres();
+        tiempoTotal++;
+        //webEngineCola.loadContent(hacerHtmlCola());
+        //webEngineReceptores.loadContent(hacerHtmlReceptores());
 
     }
 
-    private void hacerQueTodoFuncione() {
-        crearVehiculo();
-        //revisarReceptoresLibres();
-        //tiempoTotal++;
-        //webEngineCola.loadContent(hacerHtmlCola());
-        //webEngineReceptores.loadContent(hacerHtmlReceptores());
-        
+    private void revisarReceptoresLibres() {
+        for (Receptor elem : listaReceptores) {
+            if (elem.getEstoyLibre() && !colaVehiculos.estaVacia()) {
+                Vehiculo v = colaVehiculos.desencolar();
+                elem.setEstoyLibre(false);
+                elem.setTiempoOcupado(v.getTiempo());
+                elem.setTiempoTotal(v.getTiempo() + elem.getTiempoTotal());
+                elem.setCounterVehiculos(elem.getCounterVehiculos() + 1);
+            } else {
+                if (elem.getTiempoOcupado() > 0) {
+                    elem.setTiempoOcupado(elem.getTiempoOcupado() - 1);
+                    /* if (elem == listaReceptores.get(0)) {
+
+                    }*/
+                }
+            }
+        }
+    }
+
+    public void timer() {
+
+        t = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                hacerQueTodoFuncione();
+                System.out.println("deberia funcionar");
+            }
+        }));
+        t.setCycleCount(Animation.INDEFINITE);
+        t.play();
     }
 
     @Override
