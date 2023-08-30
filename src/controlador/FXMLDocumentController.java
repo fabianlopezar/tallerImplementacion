@@ -6,7 +6,6 @@
 //*  @author fabian_esteban.lopez@uao.edu.co   ,fabian lopez ,  Código 2216110
 //* @date 30 /Agosto/2023
 //* @version 1.0
-
 package controlador;
 
 import modelo.Receptor;
@@ -50,13 +49,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void startBTN(ActionEvent event) {
-
         timer();
-        // Cargar la URL en el WebView
-//        WebEngine webEngine = webView1.getEngine();
-//        webEngine.load("file:///E:/PS4/pagina_.html"); // Cambia esta URL por la que desees
-
-        
     }
 
     @FXML
@@ -105,9 +98,9 @@ public class FXMLDocumentController implements Initializable {
 
         revisarReceptoresLibres();
         tiempoTotal++;
-        //webEngineCola.loadContent(hacerHtmlCola());
+        //  webEngineCola.loadContent(hacerHtmlCola());
         //webEngineReceptores.loadContent(hacerHtmlReceptores());
- showResponse.setText(colaVehiculos.toString());
+        showResponse.setText(colaVehiculos.toString());
     }
 
     private void revisarReceptoresLibres() {
@@ -234,6 +227,7 @@ public class FXMLDocumentController implements Initializable {
             String nombreArchivo = "datosReceptores.txt";
             PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(nombreArchivo)));
             String linea = mostrarInforme();
+            //String linea = "hola";
 
         } catch (IOException e) {
             System.out.println("Sucedio un error en almacenarEnArchivoTexto: " + e);
