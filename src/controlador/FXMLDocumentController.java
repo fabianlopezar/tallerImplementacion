@@ -1,3 +1,12 @@
+//* Descripcion de la clase: la clase FXMLDocumentController coordina la simulación de un proceso de atención a vehículos en un taller utilizando JavaFX.
+//Controla la simulación, las interacciones de usuario, 
+//los cálculos de estadísticas y la generación de informes.
+//* @author alejandro.sarria@uao.edu.co, alejandro sarria, Código 2225498
+//*  @author jose_ale.burbano@uao.edu.co, jose alejandro burbano, Código 2225498
+//*  @author fabian_esteban.lopez@uao.edu.co   ,fabian lopez ,  Código 2216110
+//* @date 30 /Agosto/2023
+//* @version 1.0
+
 package controlador;
 
 import modelo.Receptor;
@@ -44,8 +53,10 @@ public class FXMLDocumentController implements Initializable {
 
         timer();
         // Cargar la URL en el WebView
-        WebEngine webEngine = webView1.getEngine();
-        webEngine.load("file:///E:/PS4/pagina_.html"); // Cambia esta URL por la que desees
+//        WebEngine webEngine = webView1.getEngine();
+//        webEngine.load("file:///E:/PS4/pagina_.html"); // Cambia esta URL por la que desees
+
+        
     }
 
     @FXML
@@ -96,7 +107,7 @@ public class FXMLDocumentController implements Initializable {
         tiempoTotal++;
         //webEngineCola.loadContent(hacerHtmlCola());
         //webEngineReceptores.loadContent(hacerHtmlReceptores());
-
+ showResponse.setText(colaVehiculos.toString());
     }
 
     private void revisarReceptoresLibres() {

@@ -1,3 +1,13 @@
+//* Descripcion de la clase: la clase Receptor modela un receptor en un proceso de atención a vehículos. 
+//Mantiene un registro de los vehículos atendidos, su estado de ocupación y el tiempo total de atención.
+//Los métodos permiten simular la atención a vehículos y actualizar información relacionada.
+//* @author alejandro.sarria@uao.edu.co, alejandro sarria, Código 2225498
+//*  @author jose_ale.burbano@uao.edu.co, jose alejandro burbano, Código 2225498
+//*  @author fabian_esteban.lopez@uao.edu.co   ,fabian lopez ,  Código 2216110
+//* @date 30 /Agosto/2023
+//* @version 1.0
+
+
 package modelo;
 
 import datos.Vehiculo;
