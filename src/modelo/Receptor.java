@@ -10,8 +10,8 @@
 
 package modelo;
 
-import datos.Vehiculo;
-import javafx.animation.Timeline;
+import datos.Carro;
+
 
 /**
  *
@@ -19,11 +19,11 @@ import javafx.animation.Timeline;
  */
 public class Receptor {
 
-    Timeline timeline = new Timeline();
+   
     private boolean estoyLibre = true;
     private int counterVehiculos = 0;
     private int tiempoTotal = 0;
-    private String response = "";
+ 
     
     private int tiempoOcupado;
 
@@ -51,24 +51,19 @@ public class Receptor {
      *
      * @return the value of response
      */
-    public String getResponse() {
-        return response;
-    }
+   
 
-    public void setResponse(String response) {
-        this.response = response;
-    }
+    
 
     public Receptor() {
     }
 
     public void sumarVehiculo() {
         counterVehiculos++;
-        response = "el numero de vehiculos atendidos fue de: " + counterVehiculos;
     }
 
     // Atender al vehiculo
-    public void atenderVehiculo(Vehiculo elem) {
+    public void atenderVehiculo(Carro elem) {
         int timeWait = elem.getTiempo() * 1000;
         sumarVehiculo();
         System.out.println("estoy ocupado " + elem);
