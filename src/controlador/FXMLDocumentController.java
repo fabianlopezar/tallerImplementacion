@@ -19,11 +19,6 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
 
-/**
- *
- *
- * Controller class for FXMLDocument.fxml
- */
 public class FXMLDocumentController implements Initializable {
 
     Cola<Vehiculo> colaVehiculos;
