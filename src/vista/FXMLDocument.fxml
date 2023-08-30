@@ -7,13 +7,12 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLDocumentController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLDocumentController">
    <children>
       <TextArea fx:id="showResponse" layoutX="54.0" layoutY="288.0" prefHeight="57.0" prefWidth="200.0" />
       <Button layoutX="378.0" layoutY="316.0" mnemonicParsing="false" onAction="#startBTN" text="Iniciar" />
       <WebView fx:id="webView1" layoutX="14.0" layoutY="63.0" prefHeight="219.0" prefWidth="368.0" />
-      <Button layoutX="274.0" layoutY="316.0" mnemonicParsing="false" onAction="#agregarBTN" text="Button" />
       <Button layoutX="526.0" layoutY="316.0" mnemonicParsing="false" onAction="#detenerBTN" text="Detener" />
-      <TextArea fx:id="showResults" layoutX="385.0" layoutY="82.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="showResults" layoutX="385.0" layoutY="82.0" prefHeight="200.0" prefWidth="273.0" />
    </children>
 </AnchorPane>

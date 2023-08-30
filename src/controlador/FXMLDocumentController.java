@@ -2,6 +2,9 @@ package controlador;
 
 import modelo.Receptor;
 import datos.Vehiculo;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,6 +20,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
+import java.io.PrintWriter;
 
 public class FXMLDocumentController implements Initializable {
 
@@ -34,11 +38,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private WebView webView1;
-
-    @FXML
-    private void agregarBTN(ActionEvent event) {
-        crearVehiculo();
-    }
 
     @FXML
     private void startBTN(ActionEvent event) {
@@ -106,14 +105,15 @@ public class FXMLDocumentController implements Initializable {
                 Vehiculo v = colaVehiculos.desencolar();
                 elem.setEstoyLibre(false);
                 elem.setTiempoOcupado(v.getTiempo());
+                elem.setCounterVehiculos(elem.getCounterVehiculos() + 1);
 
                 System.out.println("Soy el receptor: " + elem + " estoy ocupado " + elem.getTiempoOcupado());
-                // elem.setTiempoTotal(v.getTiempo() + elem.getTiempoTotal());
+                elem.setTiempoTotal(v.getTiempo() + elem.getTiempoTotal());
                 elem.setCounterVehiculos(elem.getCounterVehiculos() + 1);
             } else {
                 if (elem.getTiempoOcupado() > 0) {
                     elem.setTiempoOcupado(elem.getTiempoOcupado() - 1);
-                   
+
                 }
                 if (elem.getTiempoOcupado() == 0) {
                     elem.setEstoyLibre(true);
@@ -138,7 +138,95 @@ public class FXMLDocumentController implements Initializable {
 
     public void detenerTimer() {
         t.stop();
+        showResults.setText(mostrarInforme());
+        almacenarEnArchivoTexto();
         //showResults.setText();
+
+    }
+//--------------------- MOSTRAR RESULTADOS -----------------------------------------//
+
+    public String mostrarInforme() {
+        String informe = "";
+        String inf1 = calcularCantidadVehiculosAtendidosPorCadaReceptor();
+        String inf2 = calcularTiempoCadaReceptor();
+        String inf3 = hayarNumeroMayor();
+        String inf4 = hayarNumeroMenor();
+        String inf5 = calcularPromedio();
+        informe = inf1 + inf2 + inf3 + inf4 + inf5;
+        return informe;
+    }
+
+    public String hayarNumeroMayor() {
+        String reporte = "";
+        int numeroMayor = listaReceptores.get(0).getCounterVehiculos();
+        int numeroReceptor = 0;
+        for (int i = 0; i < listaReceptores.size(); i++) {
+            if (listaReceptores.get(i).getCounterVehiculos() > numeroMayor) {
+                numeroMayor = listaReceptores.get(i).getCounterVehiculos();
+                numeroReceptor = i;
+            }
+        }
+        reporte = "El receptor " + numeroReceptor + "antendio mas carros , y la cantidad fue de: " + numeroMayor + "\n";
+        return reporte;
+    }
+
+    public String calcularCantidadVehiculosAtendidosPorCadaReceptor() {
+        String reporte = "";
+        int i = 0;
+        for (Receptor elem : listaReceptores) {
+            i++;
+            reporte = reporte + "La Cantidad de carros atendidos por el receptor " + i + " fueron de : " + elem.getCounterVehiculos() + "\n";
+        }
+        return reporte;
+    }
+
+    public String hayarNumeroMenor() {
+        String reporte = "";
+        int numeroMenor = listaReceptores.get(0).getCounterVehiculos();
+        int numeroReceptor = 0;
+        for (int i = 0; i < listaReceptores.size(); i++) {
+            if (listaReceptores.get(i).getCounterVehiculos() < numeroMenor) {
+                numeroMenor = listaReceptores.get(i).getCounterVehiculos();
+                numeroReceptor = i;
+            }
+        }
+        reporte = "El receptor con menor vehiculos atendidos fue " + numeroReceptor + ", y la cantidad fue de: " + numeroMenor + "\n";
+        return reporte;
+    }
+
+    public String calcularPromedio() {
+        String reporte = "";
+        int tiempoTotalReceptores = 0;
+        for (Receptor elem : listaReceptores) {
+            tiempoTotalReceptores += elem.getTiempoTotal();
+        }
+        tiempoTotalReceptores = tiempoTotalReceptores / 4;
+        reporte = "El tiempo promedio es de : " + tiempoTotalReceptores + "\n";
+        return reporte;
+    }
+
+    public String calcularTiempoCadaReceptor() {
+        String reporte = "";
+        for (int i = 0; i < listaReceptores.size(); i++) {
+            reporte = reporte + "El receptor #" + i + " atendio un total de: " + listaReceptores.get(i).getTiempoTotal() + "s" + "\n";
+        }
+        return reporte;
+    }
+
+    public String calcularCarrosSinAtender() {
+        String reporte = "";
+        return reporte;
+    }
+
+    public void almacenarEnArchivoTexto() {
+        try {
+            String nombreArchivo = "datosReceptores.txt";
+            PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(nombreArchivo)));
+            String linea = mostrarInforme();
+
+        } catch (IOException e) {
+            System.out.println("Sucedio un error en almacenarEnArchivoTexto: " + e);
+        }
     }
 
     @Override
