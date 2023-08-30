@@ -4,7 +4,6 @@ import modelo.Receptor;
 import datos.Vehiculo;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,7 +51,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void detenerBTN(ActionEvent event) {
-
+        detenerTimer();
     }
 
     private void totalVehiculosAtendidos() {
@@ -69,7 +68,9 @@ public class FXMLDocumentController implements Initializable {
         for (int i = 0; i < numberVehiculos; i++) {
             Vehiculo v = FactoryVehiculo.create();
             colaVehiculos.encolar(v);
+
         }
+        System.out.println("Soy la cola: " + colaVehiculos);
     }
 
     /*Llenar lista receptores*/
@@ -82,7 +83,7 @@ public class FXMLDocumentController implements Initializable {
     private void agregarAReceptor() {
         for (Receptor elem : listaReceptores) {
             if (elem.getEstoyLibre() == true && !colaVehiculos.estaVacia()) {
-                System.out.println("soy la cola: " + colaVehiculos);
+                System.out.println("soy la cola: " + colaVehiculos.toString());
                 elem.atenderVehiculo(colaVehiculos.desencolar());
 
             }
@@ -91,7 +92,7 @@ public class FXMLDocumentController implements Initializable {
 
     private void hacerQueTodoFuncione() {
         crearVehiculo();
-        System.out.println("cree un vehiculo");
+
         revisarReceptoresLibres();
         tiempoTotal++;
         //webEngineCola.loadContent(hacerHtmlCola());
@@ -105,14 +106,18 @@ public class FXMLDocumentController implements Initializable {
                 Vehiculo v = colaVehiculos.desencolar();
                 elem.setEstoyLibre(false);
                 elem.setTiempoOcupado(v.getTiempo());
-                elem.setTiempoTotal(v.getTiempo() + elem.getTiempoTotal());
+
+                System.out.println("Soy el receptor: " + elem + " estoy ocupado " + elem.getTiempoOcupado());
+                // elem.setTiempoTotal(v.getTiempo() + elem.getTiempoTotal());
                 elem.setCounterVehiculos(elem.getCounterVehiculos() + 1);
             } else {
                 if (elem.getTiempoOcupado() > 0) {
                     elem.setTiempoOcupado(elem.getTiempoOcupado() - 1);
-                    /* if (elem == listaReceptores.get(0)) {
-
-                    }*/
+                   
+                }
+                if (elem.getTiempoOcupado() == 0) {
+                    elem.setEstoyLibre(true);
+                    System.out.println("Soy el receptor: " + elem + " estoy libre");
                 }
             }
         }
@@ -124,11 +129,16 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 hacerQueTodoFuncione();
-                System.out.println("deberia funcionar");
+
             }
         }));
         t.setCycleCount(Animation.INDEFINITE);
         t.play();
+    }
+
+    public void detenerTimer() {
+        t.stop();
+        //showResults.setText();
     }
 
     @Override
