@@ -1,12 +1,12 @@
-La Cantidad de carros atendidos por el receptor 1 fueron de : 6
+La Cantidad de carros atendidos por el receptor 1 fueron de : 9
 La Cantidad de carros atendidos por el receptor 2 fueron de : 8
-La Cantidad de carros atendidos por el receptor 3 fueron de : 6
+La Cantidad de carros atendidos por el receptor 3 fueron de : 8
 La Cantidad de carros atendidos por el receptor 4 fueron de : 6
-El receptor #0 atendio un total de: 21s
-El receptor #1 atendio un total de: 19s
-El receptor #2 atendio un total de: 23s
-El receptor #3 atendio un total de: 21s
-El receptor 1antendio mas carros , y la cantidad fue de: 8
-El receptor con menor vehiculos atendidos fue 0, y la cantidad fue de: 6
-El tiempo promedio es de : 21
+El receptor #0 atendio un total de: 18s
+El receptor #1 atendio un total de: 20s
+El receptor #2 atendio un total de: 21s
+El receptor #3 atendio un total de: 23s
+El receptor 0antendio mas carros , y la cantidad fue de: 9
+El receptor con menor vehiculos atendidos fue 3, y la cantidad fue de: 6
+El tiempo promedio es de : 20
 

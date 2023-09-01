@@ -1,10 +1,11 @@
 //* Descripcion de la clase: la clase FXMLDocumentController coordina la simulación de un proceso de atención a vehículos en un taller utilizando JavaFX.
 //Controla la simulación, las interacciones de usuario, 
 //los cálculos de estadísticas y la generación de informes.
+//@author fabian_esteban.lopez@uao.edu.co, Fabian Esteban Lopez Arias ,  Código 2216110
 //* @author alejandro.sarria@uao.edu.co, alejandro sarria, Código 2225498
 //*  @author jose_ale.burbano@uao.edu.co, jose alejandro burbano, Código 2225498
-//*  @author fabian_esteban.lopez@uao.edu.co   ,fabian lopez ,  Código 2216110
-//* @date 30 /Agosto/2023
+//*  
+//* @date 31 /Agosto/2023
 //* @version 1.0
 package controlador;
 
@@ -31,11 +32,13 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
 import java.io.PrintWriter;
-import javafx.scene.Scene;
+import javafx.scene.control.Label;
 
 public class FXMLDocumentController implements Initializable {
 
     WebEngine web;
+    WebEngine web2;
+    String html2;
     Cola<Carro> colaVehiculos;
     LinkedList<Receptor> listaReceptores = new LinkedList<>();
     private Timeline t;
@@ -44,10 +47,16 @@ public class FXMLDocumentController implements Initializable {
     String totalVehiculosPorReceptor;
 
     @FXML
+    private Label infoTXT;
+    @FXML
+    private Label titleTXT;
+    @FXML
     private TextArea showResults;
 
     @FXML
     private WebView webView1;
+    @FXML
+    private WebView webView2;
 
     @FXML
     private void startBTN(ActionEvent event) {
@@ -104,12 +113,14 @@ public class FXMLDocumentController implements Initializable {
 
     private void revisarReceptoresLibres() {
         for (Receptor elem : listaReceptores) {
-            
+
             if (elem.getEstoyLibre() && !colaVehiculos.estaVacia()) {
                 Carro v = colaVehiculos.desencolar();
                 elem.setEstoyLibre(false);
                 elem.setTiempoOcupado(v.getTiempo());
                 elem.setCounterVehiculos(elem.getCounterVehiculos() + 1);
+                elem.atenderVehiculo(v);
+                html2 = Tools.convertirColaReceptorAHtml(v.getModeloV(), v.getNombreD(), v.getTiempo(), elem.getEstoyLibre());
 
                 System.out.println("Soy el receptor: " + elem + " estoy ocupado " + elem.getTiempoOcupado());
                 elem.setTiempoTotal(v.getTiempo() + elem.getTiempoTotal());
@@ -235,12 +246,13 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void actualizarTabla() {
-        //atributo de clase
-
-        //System.out.println("estoy en actualizar.");
         String html = Tools.convertirColaAHtml(colaVehiculos);
-        //System.out.println("html   "+html);
+        //String html2 = Tools.convertirColaReceptorAHtml("toyota", "Fabian", 5);
+
         web.loadContent(html);
+        web2.loadContent(html2);
+
+        //llamar web view2
     }
 
     @Override
@@ -248,5 +260,6 @@ public class FXMLDocumentController implements Initializable {
         colaVehiculos = new Cola<>();
         llenarListaReceptores();
         web = webView1.getEngine();
+        web2 = webView2.getEngine();
     }
 }

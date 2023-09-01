@@ -7,11 +7,25 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLDocumentController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLDocumentController">
    <children>
-      <Button layoutX="385.0" layoutY="293.0" mnemonicParsing="false" onAction="#startBTN" text="Iniciar" />
-      <WebView fx:id="webView1" layoutX="419.0" layoutY="352.0" prefHeight="219.0" prefWidth="184.0" />
-      <Button layoutX="537.0" layoutY="293.0" mnemonicParsing="false" onAction="#detenerBTN" text="Detener" />
-      <TextArea fx:id="showResults" layoutX="385.0" layoutY="82.0" prefHeight="200.0" prefWidth="273.0" />
+      <Button layoutX="42.0" layoutY="342.0" mnemonicParsing="false" onAction="#startBTN" text="Iniciar">
+         <font>
+            <Font size="29.0" />
+         </font></Button>
+      <WebView fx:id="webView1" layoutX="558.0" layoutY="343.0" prefHeight="219.0" prefWidth="184.0" />
+      <Button layoutX="589.0" layoutY="318.0" mnemonicParsing="false" onAction="#detenerBTN" text="Detener/Guardar" />
+      <TextArea fx:id="showResults" layoutX="558.0" layoutY="118.0" prefHeight="200.0" prefWidth="273.0" />
+      <WebView fx:id="webView2" layoutX="29.0" layoutY="94.0" prefHeight="248.0" prefWidth="475.0" />
+      <Label fx:id="infoTXT" layoutX="629.0" layoutY="66.0" text="Informe">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Label fx:id="titleTXT" layoutX="228.0" layoutY="14.0" text="Taller Estructura de Datos">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
