@@ -1,30 +1,21 @@
 //* Descripcion de la clase: la clase Receptor modela un receptor en un proceso de atención a vehículos. 
 //Mantiene un registro de los vehículos atendidos, su estado de ocupación y el tiempo total de atención.
 //Los métodos permiten simular la atención a vehículos y actualizar información relacionada.
+//@author fabian_esteban.lopez@uao.edu.co, Fabian Esteban Lopez Arias ,  Código 2216110
 //* @author alejandro.sarria@uao.edu.co, alejandro sarria, Código 2225498
 //*  @author jose_ale.burbano@uao.edu.co, jose alejandro burbano, Código 2225498
-//*  @author fabian_esteban.lopez@uao.edu.co   ,fabian lopez ,  Código 2216110
 //* @date 30 /Agosto/2023
 //* @version 1.0
-
-
 package modelo;
 
 import datos.Carro;
 
-
-/**
- *
- * @author INTEL i 7
- */
 public class Receptor {
 
-   
     private boolean estoyLibre = true;
     private int counterVehiculos = 0;
     private int tiempoTotal = 0;
- 
-    
+
     private int tiempoOcupado;
 
     /**
@@ -45,16 +36,11 @@ public class Receptor {
         this.tiempoOcupado = tiempoOcupado;
     }
 
-
     /**
      * Get the value of response
      *
      * @return the value of response
      */
-   
-
-    
-
     public Receptor() {
     }
 
@@ -63,11 +49,8 @@ public class Receptor {
     }
 
     // Atender al vehiculo
-    public void atenderVehiculo(Carro elem) {
-        int timeWait = elem.getTiempo() * 1000;
-        sumarVehiculo();
-        System.out.println("estoy ocupado " + elem);
-        System.out.println("estoy counter " + counterVehiculos);
+    public Carro atenderVehiculo(Carro elem) {
+        return elem;
     }
 
     public int getTiempoTotal() {

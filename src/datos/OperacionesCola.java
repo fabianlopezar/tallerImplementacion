@@ -1,3 +1,6 @@
+//@author fabian_esteban.lopez@uao.edu.co, Fabian Esteban Lopez Arias ,  Código 2216110
+//* @author alejandro.sarria@uao.edu.co, alejandro sarria, Código 2225498
+//*  @author jose_ale.burbano@uao.edu.co, jose alejandro burbano, Código 2225498
 package datos;
 
 import modelo.Base;
