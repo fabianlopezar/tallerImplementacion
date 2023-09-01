@@ -7,6 +7,65 @@
 //*  
 //* @date 31 /Agosto/2023
 //* @version 1.0
+/**
+* Descripción del método: startBTN(ActionEvent event): Este método se activa cuando se hace clic en el botón "Start". Llama al método timer() para iniciar la simulación.
+
+*detenerBTN(ActionEvent event): Este método se activa cuando se hace clic en el botón "Detener". Llama al método detenerTimer() para detener la simulación y mostrar resultados.
+
+*totalVehiculosAtendidos(): Este método itera a través de la lista de receptores y calcula el total de vehículos atendidos por cada receptor. Sin embargo, la variable totalVehiculosPorReceptor no se utiliza en ningún lugar del código.
+
+*crearVehiculo(): Genera un número aleatorio de vehículos y los agrega a la cola de vehículos (colaVehiculos).
+
+*llenarListaReceptores(): Llena la lista listaReceptores con instancias de la clase Receptor.
+
+*agregarAReceptor(): Recorre la lista de receptores y si un receptor está libre y hay vehículos en la cola, atiende al siguiente vehículo en la cola.
+
+*hacerQueTodoFuncione(): Llama a los métodos necesarios para simular el paso del tiempo en la simulación. Crea vehículos, actualiza la tabla y revisa la disponibilidad de los receptores.
+
+*revisarReceptoresLibres(): Controla la disponibilidad y el tiempo ocupado de los receptores. Si un receptor está libre y hay un vehículo en la cola, lo atiende.
+
+*timer(): Configura un temporizador que llama al método hacerQueTodoFuncione() periódicamente.
+
+*detenerTimer(): Detiene el temporizador, muestra resultados en el TextArea, almacena resultados en un archivo de texto y actualiza la tabla en el WebView.
+
+*mostrarInforme(): Calcula varias estadísticas relacionadas con la atención de los receptores y las combina en una cadena que se devuelve como informe final.
+
+*hayarNumeroMayor(): Encuentra el receptor que atendió más vehículos y devuelve un reporte sobre ello.
+
+*calcularCantidadVehiculosAtendidosPorCadaReceptor(): Calcula la cantidad de vehículos atendidos por cada receptor y devuelve un informe sobre ello.
+
+*hayarNumeroMenor(): Encuentra el receptor que atendió menos vehículos y devuelve un reporte sobre ello.
+
+*calcularPromedio(): Calcula el tiempo promedio de atención de todos los receptores y devuelve un informe sobre ello.
+
+*calcularTiempoCadaReceptor(): Calcula el tiempo total de atención para cada receptor y devuelve un informe sobre ello.
+
+*calcularCarrosSinAtender(): Está presente como declaración, pero no tiene implementación en el código.
+
+*almacenarEnArchivoTexto(): Almacena el informe en un archivo de texto llamado "datosReceptores.txt".
+
+*actualizarTabla(): Utiliza el método Tools.convertirColaAHtml() para actualizar la tabla en el WebView con la información de la cola de vehículos.
+
+*initialize(URL url, ResourceBundle rb): Inicializa la cola de vehículos, llena la lista de receptores y configura el WebEngine para el WebView en la interfaz gráfica.
+
+* @param colaOriginal// Es la instancia de la clase “Cola” de tipo <T> que se extiende de la clase Base, lo que hace que colaOriginal es la cola que se desea duplicar, y su tipo de elementos debe ser una subclase de Base.
+
+* @return mostrarInforme(): Retorna una cadena de caracteres que contiene un informe con varias estadísticas relacionadas con la atención de los receptores.
+
+* @return hayarNumeroMayor(): Retorna una cadena de caracteres que informa sobre el receptor que atendió más vehículos y la cantidad atendida.
+
+* @return calcularCantidadVehiculosAtendidosPorCadaReceptor(): Retorna una cadena de caracteres que informa sobre la cantidad de carros atendidos por cada receptor.
+
+* @return hayarNumeroMenor(): Retorna una cadena de caracteres que informa sobre el receptor que atendió menos vehículos y la cantidad atendida.
+
+* @return calcularPromedio(): Retorna una cadena de caracteres que informa sobre el tiempo promedio de atención de todos los receptores.
+
+* @return calcularTiempoCadaReceptor(): Retorna una cadena de caracteres que informa sobre el tiempo total de atención para cada receptor.
+
+* @return convertirColaAHtml: Retorna una cadena en formato HTML que representa los elementos de la cola de carros.
+*/ 
+
+
 package controlador;
 
 import datos.Carro;
