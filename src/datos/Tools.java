@@ -10,6 +10,13 @@ import modelo.Cola;
 import modelo.Receptor;
 
 public class Tools {
+/**
+* Descripción del método: convertirColaAHtml () Toma la cola y la convierte en una representación de HTML
+
+* @param elemV // Es la cola que se desea convertir en una representación de HTML
+
+* @return retorna una cadena de caracteres que contiene la representación en formato HTML.
+*/ 
 
     public static String convertirColaAHtml(Cola<Carro> elemV) {
         StringBuilder sb = new StringBuilder("<html>");
